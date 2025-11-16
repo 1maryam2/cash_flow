@@ -8,15 +8,16 @@ import type { Account } from '../../types/types';
 import { getAccounts, getCartItemsCount } from '../../utils/api';
 import './AccountsListPage.css';
 
-import { Container, Form, Button, InputGroup, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, InputGroup, Row, Col, Spinner } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 export const AccountsListPage: FC = () => {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Теперь 'loading' будет использоваться
   const dispatch = useDispatch<AppDispatch>();
   const filters = useSelector((state: RootState) => state.filters);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -32,6 +33,7 @@ export const AccountsListPage: FC = () => {
 
     fetchData();
   }, [filters]);
+
   useEffect(() => {
     loadCartCount();
   }, []);
@@ -63,16 +65,25 @@ export const AccountsListPage: FC = () => {
                     type="text"
                     placeholder="Введите название операции"
                     value={filters.search}
-                    onChange={(e) => dispatch(setFilter({ filterName: 'search', value: e.target.value }))} // <-- Обновляем Redux
+                    onChange={(e) => dispatch(setFilter({ filterName: 'search', value: e.target.value }))}
                   />
                 </InputGroup>
               </Col>
             </Row>
           </Form>
         </div>
-        <Row xs={1} md={2} lg={3} className="g-4">
-          {accounts.map((account) => (
-            <Col key={account.id}>
+        {loading ? (
+          // Если идет загрузка, показываем спиннер
+          <div className="text-center">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Загрузка...</span>
+            </Spinner>
+          </div>
+        ) : (
+          // Если загрузка завершена, показываем карточки
+          <Row xs={1} md={2} lg={3} className="g-4">
+            {accounts.map((account) => (
+              <Col key={account.id}>
               <div className="card h-100">
                 <img
                   src={account.image || '/default-image.jpg'}
@@ -107,6 +118,7 @@ export const AccountsListPage: FC = () => {
             </Col>
           ))}
         </Row>
+        )}
       </Container>
       <CartButton itemsCount={cartItemsCount} />
     </>
