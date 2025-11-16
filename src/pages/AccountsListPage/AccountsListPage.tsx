@@ -10,7 +10,7 @@ import './AccountsListPage.css';
 
 import { Container, Form, Button, InputGroup, Row, Col, Spinner } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
+const defaultImageSrc = `${import.meta.env.BASE_URL}default-image.jpg`;
 export const AccountsListPage: FC = () => {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
@@ -84,13 +84,13 @@ export const AccountsListPage: FC = () => {
               <Col key={account.id}>
               <div className="card h-100">
                 <img
-                  src={account.image || 'default-image.jpg'}
+                  src={account.image || defaultImageSrc}
                   alt={account.title}
                   className="icon-wrapper"
                   onError={(e) => {
-                    if (!e.currentTarget.src.endsWith('default-image.jpg')) {
+                    if (!e.currentTarget.src.endsWith(defaultImageSrc)) {
                       e.currentTarget.onerror = null;
-                      e.currentTarget.src = 'default-image.jpg';
+                      e.currentTarget.src = defaultImageSrc;
                     }
                   }}
                 />

@@ -6,7 +6,7 @@ import { getAccountById } from '../../utils/api';
 import './AccountPage.css';
 
 import { Container } from 'react-bootstrap'; 
-
+const defaultImageSrc = `${import.meta.env.BASE_URL}default-image.jpg`;
 export const AccountPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const [account, setAccount] = useState<Account | null>(null);
@@ -54,13 +54,13 @@ export const AccountPage: FC = () => {
         
         <div className="card-title-group">
           <img 
-            src={account.image || 'default-image.jpg'} 
+            src={account.image || defaultImageSrc} 
             alt={account.title} 
             className="details-icon"
             onError={(e) => {
-              if (!e.currentTarget.src.endsWith('default-image.jpg')) {
+              if (!e.currentTarget.src.endsWith(defaultImageSrc)) {
                 e.currentTarget.onerror = null;
-                e.currentTarget.src = 'default-image.jpg'; 
+                e.currentTarget.src = defaultImageSrc; 
               }
             }}
           />

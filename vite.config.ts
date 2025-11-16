@@ -1,9 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+const base = '/cash_flow/';
 
 export default defineConfig({
-  base: '/cash_flow/',
+  base: base, 
+  define: {
+    'import.meta.env.BASE_URL': JSON.stringify(base)
+  },
   plugins: [
     react(),
     VitePWA({
