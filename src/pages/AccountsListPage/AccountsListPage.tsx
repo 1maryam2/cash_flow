@@ -14,7 +14,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 export const AccountsListPage: FC = () => {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [loading, setLoading] = useState(true); // Теперь 'loading' будет использоваться
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
   const filters = useSelector((state: RootState) => state.filters);
 
@@ -73,26 +73,24 @@ export const AccountsListPage: FC = () => {
           </Form>
         </div>
         {loading ? (
-          // Если идет загрузка, показываем спиннер
           <div className="text-center">
             <Spinner animation="border" role="status">
               <span className="visually-hidden">Загрузка...</span>
             </Spinner>
           </div>
         ) : (
-          // Если загрузка завершена, показываем карточки
           <Row xs={1} md={2} lg={3} className="g-4">
             {accounts.map((account) => (
               <Col key={account.id}>
               <div className="card h-100">
                 <img
-                  src={account.image || '/default-image.jpg'}
+                  src={account.image || 'default-image.jpg'}
                   alt={account.title}
                   className="icon-wrapper"
                   onError={(e) => {
-                    if (e.currentTarget.src !== '/default-image.jpg') {
+                    if (!e.currentTarget.src.endsWith('default-image.jpg')) {
                       e.currentTarget.onerror = null;
-                      e.currentTarget.src = '/default-image.jpg';
+                      e.currentTarget.src = 'default-image.jpg';
                     }
                   }}
                 />

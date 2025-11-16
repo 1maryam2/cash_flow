@@ -54,15 +54,15 @@ export const AccountPage: FC = () => {
         
         <div className="card-title-group">
           <img 
-            src={account.image || '/default-image.jpg'} 
+            src={account.image || 'default-image.jpg'} 
             alt={account.title} 
             className="details-icon"
-              onError={(e) => {
-                if (e.currentTarget.src !== '/default-image.jpg') {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = '/default-image.jpg';
-                }
-              }}
+            onError={(e) => {
+              if (!e.currentTarget.src.endsWith('default-image.jpg')) {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = 'default-image.jpg'; 
+              }
+            }}
           />
           <h1>{account.title}</h1>
         </div>
