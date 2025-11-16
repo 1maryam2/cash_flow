@@ -19,24 +19,21 @@ export const AccountsListPage: FC = () => {
   const filters = useSelector((state: RootState) => state.filters);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const data = await getAccounts(filters);
-        setAccounts(data);
-      } catch (error) {
-        console.error('Error loading accounts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [filters]);
-
-  useEffect(() => {
+    loadAccounts();
     loadCartCount();
   }, []);
+
+  const loadAccounts = async () => {
+    setLoading(true);
+    try {
+      const data = await getAccounts(filters);
+      setAccounts(data);
+    } catch (error) {
+      console.error('Error loading accounts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const loadCartCount = async () => {
     try {
       const count = await getCartItemsCount();
@@ -44,6 +41,11 @@ export const AccountsListPage: FC = () => {
     } catch (error) {
       console.error('Error loading cart count:', error);
     }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    loadAccounts(); 
   };
 
   const handleAddToCart = async (accountId: number) => {
@@ -57,7 +59,7 @@ export const AccountsListPage: FC = () => {
         <Breadcrumbs />
         <h1 className="text-center">Добавьте счёт в ваш прогноз</h1>
         <div className="search-container">
-          <Form className="w-100">
+          <Form className="w-100" onSubmit={handleSearch}>
             <Row className="g-3">
               <Col xs={12}>
                 <InputGroup>
@@ -67,6 +69,9 @@ export const AccountsListPage: FC = () => {
                     value={filters.search}
                     onChange={(e) => dispatch(setFilter({ filterName: 'search', value: e.target.value }))}
                   />
+                  <Button variant="dark" type="submit" disabled={loading}>
+                    {loading ? '...' : 'найти'}
+                  </Button>
                 </InputGroup>
               </Col>
             </Row>
