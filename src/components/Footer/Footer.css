@@ -1,0 +1,16 @@
+.footer {
+    background-color: #2E2E38;
+    color: #a0aec0;
+    padding: 1.5rem 2.5rem;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-content p {
+    margin: 0;
+}

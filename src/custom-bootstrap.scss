@@ -1,0 +1,58 @@
+
+$dark: #2E2E38; 
+$primary: #FFE600; 
+$light: #eef2f7; 
+$white: #ffffff;
+$secondary: #6c757d; 
+
+$body-bg: $light;
+$body-color: #2d3748;
+$font-family-sans-serif: 'Montserrat', sans-serif;
+
+$navbar-padding-y: 1rem;
+$navbar-padding-x: 0;
+$navbar-dark-color: rgba($white, 0.7);
+$navbar-dark-hover-color: $white;
+$navbar-brand-font-size: 1.75rem;
+$navbar-brand-font-weight: 700;
+$navbar-brand-padding-y: 0;
+
+$card-bg: $dark;
+$card-border-width: 0;
+$card-border-radius: 12px;
+$card-color: $white;
+$card-spacer-y: 1.75rem;
+$card-spacer-x: 1.75rem;
+$card-title-color: #d1d5db;
+
+$btn-border-radius: 20px;
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1rem;
+$btn-font-weight: 500;
+$btn-font-size: 0.9rem;
+
+$btn-secondary-bg: transparent;
+$btn-secondary-color: $primary;
+$btn-secondary-border-color: $primary;
+$btn-secondary-hover-bg: $primary;
+$btn-secondary-hover-color: $dark;
+$btn-secondary-hover-border-color: $primary;
+
+$btn-outline-light-color: #d1d5db;
+$btn-outline-light-border-color: #d1d5db;
+$btn-outline-light-hover-color: $dark;
+$btn-outline-light-hover-bg: #d1d5db;
+$btn-outline-light-hover-border-color: #d1d5db;
+
+$btn-dark-color: $dark;
+$btn-dark-bg: $white;
+$btn-dark-border-color: $dark;
+$btn-dark-hover-color: $white;
+$btn-dark-hover-bg: $dark;
+$btn-dark-hover-border-color: $dark;
+
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+@import "bootstrap/scss/bootstrap";
