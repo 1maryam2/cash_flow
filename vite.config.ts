@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
-const base = '/cash_flow/';
+const base = './';
 
 export default defineConfig({
   base: base, 
